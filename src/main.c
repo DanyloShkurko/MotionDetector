@@ -10,7 +10,6 @@
 #include <libavutil/avutil.h>
 #include <libavutil/imgutils.h>
 #include <libswscale/swscale.h>
-#include <sys/_pthread/_pthread_t.h>
 
 void *run_producer(void *producer_args) {
   int status = produce_frames(producer_args);
