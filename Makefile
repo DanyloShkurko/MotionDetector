@@ -1,6 +1,6 @@
 CC=gcc
 FFMPEG_PREF=/opt/homebrew/Cellar/ffmpeg/8.1.2
-CFLAGS=-c -g -Wall -I$(FFMPEG_PREF)/include
+CFLAGS=-c  -g -Wall -I$(FFMPEG_PREF)/include
 LDFLAGS=-L$(FFMPEG_PREF)/lib -lavcodec -lavformat -lavutil -lswscale
 TARGET=bin/
 
@@ -25,4 +25,4 @@ video_handler.o: src/video_handler.c
 	$(CC) $(CFLAGS) src/video_handler.c -o $(TARGET)video_handler.o
 
 clean:
-	rm -rf $(TARGET)*.o $(TARGET)main
+	rm -rf $(TARGET)*.o $(TARGET)motion_detector

@@ -133,12 +133,13 @@ void consume_frames(ConsumerArgs *args) {
   while (f != NULL) {
     bool has_motion_v = false;
     if (f_prev != NULL) {
-
       has_motion_v = has_motion(f_prev, f, args->treshold);
+      free(f_prev->frame);
+      free(f_prev);
     }
 
     if (has_motion_v) {
-      double seconds = f_prev->pts * av_q2d(f_prev->time_base);
+      double seconds = f->pts * av_q2d(f->time_base);
       int h = (int)(seconds / 3600) % 24;
       int m = (int)(seconds / 60) % 60;
       int s = (int)seconds % 60;
@@ -147,6 +148,10 @@ void consume_frames(ConsumerArgs *args) {
 
     f_prev = f;
     f = dequeue(args->q);
+  }
+  if (f_prev != NULL) {
+    free(f_prev->frame);
+    free(f_prev);
   }
 }
 
