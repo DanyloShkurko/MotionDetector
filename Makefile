@@ -4,13 +4,13 @@ CFLAGS=-c -g -Wall -I$(FFMPEG_PREF)/include
 LDFLAGS=-L$(FFMPEG_PREF)/lib -lavcodec -lavformat -lavutil -lswscale
 TARGET=bin/
 
-all: prepare test
+all: prepare motion_detector
 
 prepare: 
 	mkdir -p $(TARGET)
 
-test: main.o queue.o frame_handler.o video_handler.o
-	$(CC)  $(TARGET)main.o $(TARGET)queue.o $(TARGET)frame_handler.o $(TARGET)video_handler.o $(LDFLAGS) -o $(TARGET)test 
+motion_detector: main.o queue.o frame_handler.o video_handler.o
+	$(CC)  $(TARGET)main.o $(TARGET)queue.o $(TARGET)frame_handler.o $(TARGET)video_handler.o $(LDFLAGS) -o $(TARGET)motion_detector
 
 main.o: src/main.c
 	$(CC) $(CFLAGS) src/main.c -o $(TARGET)main.o
